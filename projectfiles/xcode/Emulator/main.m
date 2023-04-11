@@ -18,5 +18,15 @@ int main(int argc, const char * argv[]) {
 	@autoreleasepool {
 	    // Setup code that might create autoreleased objects goes here.
 	}
-	return NSApplicationMain(argc, argv);
+
+    char headless_arg[] = "--headless";
+
+    for (int i = 0; i < argc; ++i) {
+        if (strcmp(argv[i], headless_arg) == 0) {
+            printf("Running in headless mode.\n");
+            return 0;
+        }
+    }
+
+    return NSApplicationMain(argc, argv);
 }

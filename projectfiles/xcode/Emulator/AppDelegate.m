@@ -35,7 +35,7 @@ static AppDelegate *sharedInstance = nil;
     FBLogViewerController *logViewer;
     FBPreferencesController *prefs;
     FBEmulatorController *emulator;
-    FBLauncherController *launcher;
+//    FBLauncherController *launcher;
     FBAboutController *about;
 
     IOPMAssertionID sleepAssertId;
@@ -94,10 +94,11 @@ static AppDelegate *sharedInstance = nil;
     emulator = [FBEmulatorController new];
     [emulator window]; // Trigger awakeFromNib
 
-    launcher = [FBLauncherController new];
-    [launcher showWindow:self];
+//    launcher = [FBLauncherController new];
+//    [launcher showWindow:self];
 
     [_runloop start];
+    [self startSF3];
 }
 
 - (void) applicationWillTerminate:(NSNotification *) aNotification {
@@ -151,9 +152,9 @@ static AppDelegate *sharedInstance = nil;
 
 - (void) displayLauncher:(id) sender
 {
-    if (!launcher)
-        launcher = [FBLauncherController new];
-    [launcher showWindow:self];
+//    if (!launcher)
+//        launcher = [FBLauncherController new];
+//    [launcher showWindow:self];
 }
 
 - (void) displayAbout:(id) sender
@@ -198,6 +199,11 @@ static AppDelegate *sharedInstance = nil;
 }
 
 #pragma mark - Private
+
+-(void) startSF3 {
+    NSString *sf3Path = [NSBundle.mainBundle pathForResource:@"sfiii3nr1" ofType:@"zip"];
+    [self loadPath:sf3Path];
+}
 
 - (NSString *) appSupportPath
 {

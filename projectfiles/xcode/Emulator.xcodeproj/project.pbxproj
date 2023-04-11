@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2EC884F729E5CEF900636F75 /* d_topdrive.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2EC884F629E5CEF900636F75 /* d_topdrive.cpp */; };
+		2EC884F929E5D0BD00636F75 /* sfiii3nr1.zip in Resources */ = {isa = PBXBuildFile; fileRef = 2EC884F829E5D0BD00636F75 /* sfiii3nr1.zip */; };
 		55F1B3E629D1599500F939E3 /* dtimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55F1B3E429D1599500F939E3 /* dtimer.cpp */; };
 		55F1B3E929D15A1600F939E3 /* pic8259.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55F1B3E729D15A1600F939E3 /* pic8259.cpp */; };
 		55F1B3EB29D15A7100F939E3 /* d_akazukin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55F1B3EA29D15A7100F939E3 /* d_akazukin.cpp */; };
@@ -1153,6 +1154,7 @@
 
 /* Begin PBXFileReference section */
 		2EC884F629E5CEF900636F75 /* d_topdrive.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = d_topdrive.cpp; sourceTree = "<group>"; };
+		2EC884F829E5D0BD00636F75 /* sfiii3nr1.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = sfiii3nr1.zip; sourceTree = "<group>"; };
 		55F1B3E329D1595C00F939E3 /* rectangle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = rectangle.h; sourceTree = "<group>"; };
 		55F1B3E429D1599500F939E3 /* dtimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dtimer.cpp; sourceTree = "<group>"; };
 		55F1B3E529D1599500F939E3 /* dtimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dtimer.h; sourceTree = "<group>"; };
@@ -2897,6 +2899,7 @@
 		FE1B108F235615940065200C /* Emulator */ = {
 			isa = PBXGroup;
 			children = (
+				2EC884F829E5D0BD00636F75 /* sfiii3nr1.zip */,
 				FE1B109B235615960065200C /* FinalBurnNeo.entitlements */,
 				FE55611D25906B4E00A19F2D /* FinalBurn NeoDebug.entitlements */,
 				FE2BC6AF23615BBC00B9D150 /* Controllers */,
@@ -5419,6 +5422,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FE0A7E9A23938E9F001E6997 /* Launcher.xib in Resources */,
+				2EC884F929E5D0BD00636F75 /* sfiii3nr1.zip in Resources */,
 				FE2BC6BB2362B4E200B9D150 /* dsa_pub.pem in Resources */,
 				FEF4EE892363720B004E0DCE /* Defaults.plist in Resources */,
 				FE0A7EAA239B8A7E001E6997 /* About.xib in Resources */,

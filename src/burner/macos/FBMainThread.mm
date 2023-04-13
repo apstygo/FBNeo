@@ -93,7 +93,8 @@ typedef enum LogEntryType {
 
 - (void) main
 {
-    SetNVRAMPath([AppDelegate.sharedInstance.nvramPath cStringUsingEncoding:NSUTF8StringEncoding]);
+    NSString* saveStatePath = [NSBundle.mainBundle pathForResource:@"sfiii3nr1" ofType:@"fs"];
+    SetNVRAMPath([saveStatePath cStringUsingEncoding:NSUTF8StringEncoding]);
 
     while (!self.isCancelled) {
         if (pathToLoad == nil) {

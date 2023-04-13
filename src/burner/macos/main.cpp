@@ -63,8 +63,9 @@ int MainInit(const char *path, const char *setname)
 
     // Load NVRAM
     char temp[MAX_PATH];
-    snprintf(temp, MAX_PATH, "%s/%s.nvr", NVRAMPath, BurnDrvGetTextA(0));
-    BurnStateLoad(temp, 0, NULL);
+    snprintf(temp, MAX_PATH, "%s", NVRAMPath);
+
+    BurnStateLoad(temp, 1, NULL);
 
     if (bRunPause)
         AudSoundStop();

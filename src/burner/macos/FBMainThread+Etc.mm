@@ -20,6 +20,11 @@
 #include "burnint.h"
 #include "driverlist.h"
 
+// state.cpp
+
+extern INT32 BurnStateSave(TCHAR* szName, INT32 bAll);
+extern INT32 BurnStateLoad(TCHAR* szName, INT32 bAll, INT32 (*pLoadGame)());
+
 // Placing burner.h stuff in the NSThread file
 // messes with thread execution for some reason,
 // so I'm implementing it as a category - AK
@@ -184,6 +189,18 @@ save:
 
     [AppDelegate.sharedInstance.input simReset];
     return YES;
+}
+
+- (void)saveState:(NSString *)path {
+    char temp[MAX_PATH];
+    snprintf(temp, MAX_PATH, "%s", [path cStringUsingEncoding:NSUTF8StringEncoding]);
+    BurnStateSave(temp, 1);
+}
+
+- (void)loadState:(NSString *)path {
+    char temp[MAX_PATH];
+    snprintf(temp, MAX_PATH, "%s", [path cStringUsingEncoding:NSUTF8StringEncoding]);
+    BurnStateLoad(temp, 1, NULL);
 }
 
 @end

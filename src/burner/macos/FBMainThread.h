@@ -75,5 +75,7 @@
 - (void) applyDip:(FBDipOption *) option;
 - (BOOL) restoreDipState:(NSString *) path;
 - (BOOL) saveDipState:(NSString *) path;
+- (void) saveState:(NSString *) path;
+- (void) loadState:(NSString *) path;
 
 @end

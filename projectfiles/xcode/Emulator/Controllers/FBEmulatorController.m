@@ -343,6 +343,26 @@
                   animate:YES];
 }
 
+- (IBAction)saveState:(id)sender {
+    NSSavePanel* savePanel = [NSSavePanel savePanel];
+
+    [savePanel beginWithCompletionHandler:^(NSModalResponse result) {
+        if (result == NSModalResponseOK) {
+            [self.runloop saveState:savePanel.URL.path];
+        }
+    }];
+}
+
+- (IBAction)loadState:(id)sender {
+    NSOpenPanel* openPanel = [NSOpenPanel openPanel];
+
+    [openPanel beginWithCompletionHandler:^(NSModalResponse result) {
+        if (result == NSModalResponseOK) {
+            [self.runloop loadState:openPanel.URLs.firstObject.path];
+        }
+    }];
+}
+
 - (void) resizeDoubleSize:(id) sender
 {
     NSSize screenSize = self.video.gameScreenSize;

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="15505" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21701"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -136,12 +136,22 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Game" id="cgf-ex-L8x">
                         <items>
+                            <menuItem title="Save State" keyEquivalent="s" id="1aQ-Vs-InJ">
+                                <connections>
+                                    <action selector="saveState:" target="-1" id="lTy-lB-qeJ"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Load State" keyEquivalent="l" id="Lqf-DC-kfh">
+                                <connections>
+                                    <action selector="loadState:" target="-1" id="kjZ-3Q-Hdc"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="HHV-Gg-f59"/>
                             <menuItem title="Reset" keyEquivalent="r" id="JkY-XH-e2q">
                                 <connections>
                                     <action selector="resetEmulation:" target="-1" id="jPc-9m-cTE"/>
                                 </connections>
                             </menuItem>
-                            <menuItem isSeparatorItem="YES" id="HHV-Gg-f59"/>
                             <menuItem title="Pause" keyEquivalent="p" id="Jl5-0C-ZL9">
                                 <connections>
                                     <action selector="togglePause:" target="-1" id="s4r-F4-i9t"/>

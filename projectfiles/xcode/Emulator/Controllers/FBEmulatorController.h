@@ -31,6 +31,7 @@
 
 - (IBAction) resetEmulation:(id) sender;
 - (IBAction) togglePause:(id) sender;
+- (IBAction) saveState:(id)sender;
 
 - (IBAction) resizeNormalSize:(id) sender;
 - (IBAction) resizeDoubleSize:(id) sender;

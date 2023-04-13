@@ -435,26 +435,10 @@ static unsigned char joyState[maxJoysticks][256];
 
 - (void) initControls:(struct GameInp *) pgi
                   szi:(const char *) szi
+                    i:(int) i
 {
-    NSArray<AKGamepad*> *gamepads = [AKGamepadManager.sharedInstance allConnected];
-    if (strnlen(szi, 3) >= 3
-        && szi[0] == 'p'
-        && szi[1] >= '0'
-        && szi[1] <= '9'
-        && szi[2] == ' ') {
-        int player = szi[1] - '0';
-        if (player > gamepads.count) {
-            return;
-        }
-        AKGamepad *gp = [gamepads objectAtIndex:player-1];
-        FBInputMap *map = [connectedMaps objectForKey:gp.vendorProductString];
-        int code = [map physicalCodeForVirtual:[NSString stringWithCString:szi
-                                                                  encoding:NSASCIIStringEncoding]];
-        if (code != -1) {
-            pgi->nInput = GIT_SWITCH;
-            pgi->Input.Switch.nCode = ((player << 8) | 0x4000) | (code & 0xff);
-        }
-    }
+    pgi->nInput = GIT_SWITCH;
+    pgi->Input.Switch.nCode = i;
 }
 
 @end
@@ -470,10 +454,9 @@ bool AppProcessKeyboardInput()
 
 #pragma mark - FinalBurn callbacks
 
-int MacOSinpInitControls(struct GameInp *pgi, const char *szi)
+int MacOSinpInitControls(int i, struct GameInp *pgi, const char *szi)
 {
-    [AppDelegate.sharedInstance.input initControls:pgi
-                                               szi:szi];
+    [AppDelegate.sharedInstance.input initControls:pgi szi:szi i:i];
     return 0;
 }
 
@@ -533,35 +516,16 @@ int MacOSinpMouseAxis(int i, int nAxis)
     return 0;
 }
 
+unsigned int frameCounter = 0;
+bool didPressCoin = false;
+
 int MacOSinpState(int nCode)
 {
-    if (nCode < 0)
-        return 0;
+    frameCounter += 1;
 
-    if (nCode < 0x100) {
-        if (simKeyState[nCode]) {
-            simKeyState[nCode] = 0;
-            return 1;
-        }
-        return keyState[nCode];
-    }
-
-    if (nCode < 0x4000)
-        return 0;
-
-    if (nCode < 0x8000) {
-        int joyIndex = (nCode - 0x4000) >> 8;
-        return joyState[joyIndex - 1][nCode & 0xff];
-    }
-
-    if (nCode < 0xC000) {
-        if (((nCode - 0x8000) >> 8) == 0) {
-            switch (nCode & 0x7f) {
-                case 0: return (AppDelegate.sharedInstance.input.mouseButtonStates & FBN_LMB) != 0;
-                case 1: return (AppDelegate.sharedInstance.input.mouseButtonStates & FBN_RMB) != 0;
-                case 2: return (AppDelegate.sharedInstance.input.mouseButtonStates & FBN_MMB) != 0;
-            }
-        }
+    if (nCode == 0 /* P1 Coin */ && frameCounter > 6000 && !didPressCoin) {
+        didPressCoin = true;
+        return 1;
     }
 
     return 0;

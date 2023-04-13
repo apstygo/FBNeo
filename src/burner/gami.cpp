@@ -59,7 +59,7 @@ UINT8 *lua_hotkeys[] = {
 #define SETS_VS ( (BurnDrvGetGenreFlags() & GBF_VSFIGHT) && ((BurnDrvGetFamilyFlags() & FBF_SF) || (BurnDrvGetFamilyFlags() & FBF_DSTLK) || (BurnDrvGetFamilyFlags() &FBF_PWRINST) || HW_NEOGEO) )
 
 #ifdef BUILD_MACOS
-int MacOSinpInitControls(struct GameInp *pgi, const char *szi);
+int MacOSinpInitControls(int i, struct GameInp *pgi, const char *szi);
 #endif
 
 // ---------------------------------------------------------------------------
@@ -2246,7 +2246,7 @@ INT32 GameInpDefault()
 			continue;
 		}
 #ifdef BUILD_MACOS
-        if (MacOSinpInitControls(pgi, bii.szInfo) == 0) {
+        if (MacOSinpInitControls(i, pgi, bii.szInfo) == 0) {
             continue; // NOTE: prevents 'GameInpAutoOne' from being called
         }
 #endif

@@ -495,8 +495,11 @@ int MacOSinpInit()
     return 0;
 }
 
+unsigned int frameCounter = 0;
+
 int MacOSinpStart()
 {
+    frameCounter += 1;
     return 0;
 }
 
@@ -516,16 +519,49 @@ int MacOSinpMouseAxis(int i, int nAxis)
     return 0;
 }
 
-unsigned int frameCounter = 0;
-bool didPressCoin = false;
+struct frame_input {
+    int frame;
+    int button;
+};
+
+#define SF3_P1_COIN     0
+#define SF3_P1_START    1
+#define SF3_P1_UP       2
+#define SF3_P1_RIGHT    5
+#define SF3_P1_WK_PUNCH 6
+
+#define SF3_P2_COIN     12
+#define SF3_P2_START    13
+#define SF3_P2_WK_PUNCH 18
+
+static struct frame_input inputs[] = {
+//    { 300, SF3_P1_COIN },
+//    { 300, SF3_P2_COIN },
+//    { 360, SF3_P1_START },
+//    { 480, SF3_P2_START },
+//
+//    { 500, SF3_P1_UP },
+//    { 515, SF3_P1_UP },
+//    { 530, SF3_P1_UP },
+//    { 545, SF3_P1_UP },
+//    { 560, SF3_P1_RIGHT },
+//    { 575, SF3_P1_RIGHT },
+//
+//    { 590, SF3_P1_WK_PUNCH },
+//    { 590, SF3_P2_WK_PUNCH },
+//    { 660, SF3_P1_WK_PUNCH },
+//    { 660, SF3_P2_WK_PUNCH },
+};
 
 int MacOSinpState(int nCode)
 {
-    frameCounter += 1;
+    unsigned int i;
+    size_t size = sizeof(inputs) / sizeof(frame_input);
 
-    if (nCode == 0 /* P1 Coin */ && frameCounter > 6000 && !didPressCoin) {
-        didPressCoin = true;
-        return 1;
+    for (i = 0; i < size; ++i) {
+        if (inputs[i].frame == frameCounter && inputs[i].button == nCode) {
+            return 1;
+        }
     }
 
     return 0;

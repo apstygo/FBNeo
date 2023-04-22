@@ -1,5 +1,6 @@
 #include "burner.h"
 #include "main.h"
+#include "remote.h"
 
 #include <Carbon/Carbon.h>
 
@@ -58,6 +59,7 @@ int MainInit(const char *path, const char *setname)
     if (DrvInit(i, 0))
         return 1;
 
+    RemoteInit();
     MediaInit();
     RunInit();
 

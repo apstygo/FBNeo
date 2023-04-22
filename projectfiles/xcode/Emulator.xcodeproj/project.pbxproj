@@ -10,6 +10,7 @@
 		2EC884F729E5CEF900636F75 /* d_topdrive.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2EC884F629E5CEF900636F75 /* d_topdrive.cpp */; };
 		2EC884F929E5D0BD00636F75 /* sfiii3nr1.zip in Resources */ = {isa = PBXBuildFile; fileRef = 2EC884F829E5D0BD00636F75 /* sfiii3nr1.zip */; };
 		2EC884FB29E8639200636F75 /* initial_state.fs in Resources */ = {isa = PBXBuildFile; fileRef = 2EC884FA29E8639100636F75 /* initial_state.fs */; };
+		2EC884FD29F1CAFB00636F75 /* remote.c in Sources */ = {isa = PBXBuildFile; fileRef = 2EC884FC29F1CAFB00636F75 /* remote.c */; };
 		55F1B3E629D1599500F939E3 /* dtimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55F1B3E429D1599500F939E3 /* dtimer.cpp */; };
 		55F1B3E929D15A1600F939E3 /* pic8259.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55F1B3E729D15A1600F939E3 /* pic8259.cpp */; };
 		55F1B3EB29D15A7100F939E3 /* d_akazukin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55F1B3EA29D15A7100F939E3 /* d_akazukin.cpp */; };
@@ -1157,6 +1158,8 @@
 		2EC884F629E5CEF900636F75 /* d_topdrive.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = d_topdrive.cpp; sourceTree = "<group>"; };
 		2EC884F829E5D0BD00636F75 /* sfiii3nr1.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = sfiii3nr1.zip; sourceTree = "<group>"; };
 		2EC884FA29E8639100636F75 /* initial_state.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = initial_state.fs; sourceTree = "<group>"; };
+		2EC884FC29F1CAFB00636F75 /* remote.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = remote.c; sourceTree = "<group>"; };
+		2EC884FE29F1CCD500636F75 /* remote.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = remote.h; sourceTree = "<group>"; };
 		55F1B3E329D1595C00F939E3 /* rectangle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = rectangle.h; sourceTree = "<group>"; };
 		55F1B3E429D1599500F939E3 /* dtimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dtimer.cpp; sourceTree = "<group>"; };
 		55F1B3E529D1599500F939E3 /* dtimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dtimer.h; sourceTree = "<group>"; };
@@ -3591,6 +3594,8 @@
 				FE1B1EB423561A660065200C /* cd */,
 				FE1B1E8E23561A660065200C /* input */,
 				FE1B1E5123561A660065200C /* video */,
+				2EC884FC29F1CAFB00636F75 /* remote.c */,
+				2EC884FE29F1CCD500636F75 /* remote.h */,
 			);
 			path = intf;
 			sourceTree = "<group>";
@@ -6658,6 +6663,7 @@
 				FE1B267C23561A770065200C /* tc0100scn.cpp in Sources */,
 				FE1B255823561A760065200C /* mc8123.cpp in Sources */,
 				FE1B266123561A770065200C /* d_taitof2.cpp in Sources */,
+				2EC884FD29F1CAFB00636F75 /* remote.c in Sources */,
 				FE1B274723561A780065200C /* d_headonb.cpp in Sources */,
 				FE1B250823561A760065200C /* d_crospang.cpp in Sources */,
 			);

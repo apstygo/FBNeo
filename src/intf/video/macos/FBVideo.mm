@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 
 #include "burner.h"
+#include "remote.h"
 
 @implementation FBVideo
 
@@ -172,6 +173,7 @@ static int MacOSVideoFrame(bool redraw)
 
 static int MacOSVideoPaint(int validate)
 {
+    RemoteSendBuffer(screenBuffer);
     return [AppDelegate.sharedInstance.video renderToSurface:screenBuffer] ? 0 : 1;
 }
 

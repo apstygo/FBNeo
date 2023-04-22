@@ -19,6 +19,7 @@
 #import "NSString+Etc.h"
 
 #include "burner.h"
+#include "remote.h"
 
 #define DEBUG_GP
 
@@ -534,7 +535,7 @@ struct frame_input {
 #define SF3_P2_START    13
 #define SF3_P2_WK_PUNCH 18
 
-static struct frame_input inputs[] = {
+static struct frame_input local_inputs[] = {
 //    { 300, SF3_P1_COIN },
 //    { 300, SF3_P2_COIN },
 //    { 360, SF3_P1_START },
@@ -553,15 +554,26 @@ static struct frame_input inputs[] = {
 //    { 660, SF3_P2_WK_PUNCH },
 };
 
-int MacOSinpState(int nCode)
-{
-    unsigned int i;
-    size_t size = sizeof(inputs) / sizeof(frame_input);
+static size_t local_input_count = sizeof(local_inputs) / sizeof(frame_input);
 
-    for (i = 0; i < size; ++i) {
-        if (inputs[i].frame == frameCounter && inputs[i].button == nCode) {
+int LocalInpState(int nCode) {
+    for (unsigned int i = 0; i < local_input_count; ++i) {
+        if (local_inputs[i].frame == frameCounter && local_inputs[i].button == nCode) {
             return 1;
         }
+    }
+
+    return 0;
+}
+
+int MacOSinpState(int nCode)
+{
+    if (local_input_count > 0) {
+        return LocalInpState(nCode);
+    }
+
+    if (remote_inputs[nCode]) {
+        return 1;
     }
 
     return 0;

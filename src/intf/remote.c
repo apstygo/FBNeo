@@ -4,10 +4,14 @@
 #include <netinet/in.h>
 #include <unistd.h>
 
+#include "remote.h"
+
 #define PORT 8080
 #define RESOLUTION 384 * 224
 #define FB_BUFFER_SIZE RESOLUTION * 2
 #define RGB_BUFFER_SIZE RESOLUTION * 3
+
+char remote_inputs[INPUT_COUNT];
 
 static int remote_socket;
 
@@ -53,5 +57,10 @@ int RemoteSendBuffer(unsigned char* buffer) {
     }
 
     send(remote_socket, rgb_buffer, RGB_BUFFER_SIZE, 0);
+
+    // get inputs
+
+    recv(remote_socket, remote_inputs, INPUT_COUNT, 0);
+
     return 0;
 }

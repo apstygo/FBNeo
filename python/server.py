@@ -8,10 +8,11 @@ BUFFER_HEIGHT = 224
 BUFFER_BBP = 3
 BUFFER_SIZE = BUFFER_WIDTH * BUFFER_HEIGHT * BUFFER_BBP
 
-def save_buffer_to_file(buffer: bytes): 
+def process_image(buffer: bytes) -> list[bool]:
     im = Image.frombytes('RGB', (BUFFER_WIDTH, BUFFER_HEIGHT), buffer)
-    im.show()
-    pass
+    inputs = [False] * 29
+    inputs[5] = True
+    return inputs
 
 sock = socket.socket()
 sock.bind(('', PORT))
@@ -21,12 +22,12 @@ connection, address = sock.accept()
 print(f'Received a connection at address: {address}')
 
 while True:
-    data = connection.recv(BUFFER_SIZE)
+    buffer = connection.recv(BUFFER_SIZE, socket.MSG_WAITALL)
 
-    if not data:
+    if not buffer:
         break
 
-    save_buffer_to_file(data)
-    break
+    inputs = process_image(buffer)
+    connection.send(bytearray(inputs))
 
 connection.close()

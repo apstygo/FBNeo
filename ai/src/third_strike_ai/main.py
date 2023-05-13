@@ -3,6 +3,10 @@ import numpy as np
 from PIL import Image
 from third_strike_ai import constants as const
 
+import typer
+import gymnasium
+
+app = typer.Typer()
 
 def process_image(buffer: bytes) -> list[bool]:
     im = Image.frombytes('RGB', (const.BUFFER_WIDTH, const.BUFFER_HEIGHT), buffer)
@@ -29,5 +33,11 @@ def loop():
 
     connection.close()
 
-if __name__ == '__main__':
-    loop()
+@app.command()
+def run():    
+    env = gymnasium.make(
+        "ThirdStrike-v0", 
+        executable='./.build/Build/Products/Debug/FinalBurn Neo.app/Contents/MacOS/FinalBurn Neo'
+    )
+
+    env.reset()

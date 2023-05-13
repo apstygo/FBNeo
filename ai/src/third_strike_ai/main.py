@@ -40,4 +40,6 @@ def run():
         executable='./.build/Build/Products/Debug/FinalBurn Neo.app/Contents/MacOS/FinalBurn Neo'
     )
 
-    env.reset()
+    observation, info = env.reset()
+    image = Image.fromarray(observation)
+    image.show()

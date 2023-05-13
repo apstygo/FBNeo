@@ -1,16 +1,18 @@
 from subprocess import Popen
-from socket import socket
+import socket
 from dataclasses import dataclass
+import os
 
 import numpy as np
 import gymnasium as gym
+from PIL import Image
 from third_strike_ai import constants as const
 
 
 @dataclass
 class Connection:
     process: Popen[bytes]
-    socket: socket
+    socket: socket.socket
 
 class ThirdStrikeEnv(gym.Env):
     metadata = {"render_modes": ["human", "rgb_array"]}
@@ -41,16 +43,26 @@ class ThirdStrikeEnv(gym.Env):
 
         self._close_connection()
 
-        process = Popen([self.executable])
+        # start process
+        env = dict(os.environ, pauseWhenInactive="false")
+        process = Popen([self.executable], env=env)
         
-        sock = socket()
+        # open socket
+        sock = socket.socket()
         sock.bind(('', const.PORT))
         sock.listen(1)
 
         sock, address = sock.accept()
         print(f'Received a connection at address: {address}')
 
+        # store connection
         self.connection = Connection(process, sock)
+
+        # receive observation
+        observation = self._receive_frame()
+        info = dict()
+
+        return (observation, info)
 
     def render(self):
         # TODO: Implement
@@ -58,6 +70,14 @@ class ThirdStrikeEnv(gym.Env):
 
     def close(self):
         self._close_connection()
+
+    def _receive_frame(self):
+        if self.connection is None:
+            return None
+
+        buffer = self.connection.socket.recv(const.BUFFER_SIZE, socket.MSG_WAITALL)
+        image = Image.frombytes('RGB', (const.BUFFER_WIDTH, const.BUFFER_HEIGHT), buffer)
+        return np.asarray(image)
 
     def _close_connection(self):
         if self.connection is not None:

@@ -24,3 +24,5 @@ fbneo.dat
 
 venv/
 *.egg-info/
+.build/
+__pycache__/

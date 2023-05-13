@@ -29,11 +29,13 @@ class ThirdStrikeEnv(gym.Env):
     def __init__(
         self, 
         executable: str,
-        is_player_one: bool = True, 
+        is_player_one: bool = True,
+        damage_weights: tuple[float, float] = (1, 1),
         render_mode: str | None = None
     ):
         self.executable = executable
         self.is_player_one = is_player_one
+        self.damage_weights = damage_weights
         self.fight_state = FightState()
         self.connection: Connection | None = None 
 
@@ -76,7 +78,7 @@ class ThirdStrikeEnv(gym.Env):
             # calculate reward based on damage
             opponent_damage = self.fight_state.opponent_hp - opponent_hp
             agent_damage = self.fight_state.agent_hp - agent_hp
-            reward = opponent_damage - agent_damage
+            reward = opponent_damage * self.damage_weights[0] - agent_damage * self.damage_weights[1]
 
             # handle round end
             if agent_hp == 0:

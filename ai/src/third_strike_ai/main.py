@@ -43,3 +43,4 @@ def run():
     observation, info = env.reset()
     image = Image.fromarray(observation)
     image.show()
+    print(info)

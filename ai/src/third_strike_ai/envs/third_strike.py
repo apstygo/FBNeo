@@ -2,6 +2,7 @@ from subprocess import Popen
 import socket
 from dataclasses import dataclass
 import os
+from typing import Any
 
 import numpy as np
 import gymnasium as gym
@@ -59,8 +60,9 @@ class ThirdStrikeEnv(gym.Env):
         self.connection = Connection(process, sock)
 
         # receive observation
-        observation = self._receive_frame()
-        info = dict()
+        frame = self._receive_frame(self.connection)
+        observation = np.asarray(frame)
+        info = self._get_info(frame)
 
         return (observation, info)
 
@@ -71,13 +73,15 @@ class ThirdStrikeEnv(gym.Env):
     def close(self):
         self._close_connection()
 
-    def _receive_frame(self):
-        if self.connection is None:
-            return None
+    def _receive_frame(self, connection: Connection) -> Image.Image:
+        buffer = connection.socket.recv(const.BUFFER_SIZE, socket.MSG_WAITALL)
+        return Image.frombytes('RGB', (const.BUFFER_WIDTH, const.BUFFER_HEIGHT), buffer)
 
-        buffer = self.connection.socket.recv(const.BUFFER_SIZE, socket.MSG_WAITALL)
-        image = Image.frombytes('RGB', (const.BUFFER_WIDTH, const.BUFFER_HEIGHT), buffer)
-        return np.asarray(image)
+    def _get_info(self, frame: Image.Image) -> dict[str, Any]:
+        return {
+            'p1_health': 100.0,
+            'p2_health': 100.0
+        }
 
     def _close_connection(self):
         if self.connection is not None:

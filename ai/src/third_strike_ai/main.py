@@ -15,22 +15,18 @@ def run():
         is_player_one=True
     )
 
-    observation, info = env.reset()
-    opponent_hp = 160
+    while True:
+        observation, info = env.reset()
+        run_set(env)
+        break
 
+def run_set(env: gymnasium.Env):
     while True:
         action = env.action_space.sample()
         observation, reward, terminated, truncated, info = env.step(action)
 
-        new_opponent_hp = info['opponent_hp']
-
-        if new_opponent_hp < opponent_hp:
-            print(f'💥 {opponent_hp - new_opponent_hp} damage')
-            
-            if new_opponent_hp == 0:
-                print('💀 dead')
-
-        opponent_hp = new_opponent_hp
+        if reward != 0:
+            print(f'💥 reward {reward}')
 
         if terminated or truncated:
             break

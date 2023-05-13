@@ -15,6 +15,14 @@ class Connection:
     process: Popen[bytes]
     socket: socket.socket
 
+@dataclass
+class FightState:
+    engaged: bool = False
+    agent_hp: int = const.HP_MAX
+    opponent_hp: int = const.HP_MAX
+    agent_points: int = 0
+    opponent_points: int = 0
+
 class ThirdStrikeEnv(gym.Env):
     metadata = {"render_modes": ["human", "rgb_array"]}
 
@@ -26,6 +34,7 @@ class ThirdStrikeEnv(gym.Env):
     ):
         self.executable = executable
         self.is_player_one = is_player_one
+        self.fight_state = FightState()
         self.connection: Connection | None = None 
 
         # Observations are frames
@@ -53,18 +62,44 @@ class ThirdStrikeEnv(gym.Env):
         # get state
         observation, info = self._get_state()
 
-        # calculate reward and stop conditions
-        # TODO: do proper calculations
-        reward = 0
-        terminated = False
-        truncated = False
+        agent_hp = info['agent_hp']
+        opponent_hp = info['opponent_hp']
 
-        return observation, reward, terminated, truncated, info
+        # calculate reward and stop conditions
+        reward = 0
+
+        if not self.fight_state.engaged and agent_hp == const.HP_MAX and opponent_hp == const.HP_MAX:
+            # engage once HP is reset
+            self.fight_state.engaged = True
+
+        if self.fight_state.engaged:
+            # calculate reward based on damage
+            opponent_damage = self.fight_state.opponent_hp - opponent_hp
+            agent_damage = self.fight_state.agent_hp - agent_hp
+            reward = opponent_damage - agent_damage
+
+            # handle round end
+            if agent_hp == 0:
+                self.fight_state.opponent_points += 1
+                self.fight_state.engaged = False
+
+            if opponent_hp == 0:
+                self.fight_state.agent_points += 1
+                self.fight_state.engaged = False
+
+        self.fight_state.agent_hp = agent_hp
+        self.fight_state.opponent_hp = opponent_hp
+
+        terminated = self.fight_state.agent_points == 2 or self.fight_state.opponent_points == 2
+
+        return observation, reward, terminated, False, info
 
     def reset(self, seed=None, options=None):
         super().reset(seed=seed)
 
+        # cleanup
         self._close_connection()
+        self.fight_state = FightState()
 
         # start process
         env = dict(os.environ, pauseWhenInactive="false")

@@ -11,6 +11,7 @@
 		2EC884F929E5D0BD00636F75 /* sfiii3nr1.zip in Resources */ = {isa = PBXBuildFile; fileRef = 2EC884F829E5D0BD00636F75 /* sfiii3nr1.zip */; };
 		2EC884FB29E8639200636F75 /* initial_state.fs in Resources */ = {isa = PBXBuildFile; fileRef = 2EC884FA29E8639100636F75 /* initial_state.fs */; };
 		2EC884FD29F1CAFB00636F75 /* remote.c in Sources */ = {isa = PBXBuildFile; fileRef = 2EC884FC29F1CAFB00636F75 /* remote.c */; };
+		2EC885012A12C34400636F75 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC885002A12C34400636F75 /* main.swift */; };
 		55F1B3E629D1599500F939E3 /* dtimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55F1B3E429D1599500F939E3 /* dtimer.cpp */; };
 		55F1B3E929D15A1600F939E3 /* pic8259.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55F1B3E729D15A1600F939E3 /* pic8259.cpp */; };
 		55F1B3EB29D15A7100F939E3 /* d_akazukin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55F1B3EA29D15A7100F939E3 /* d_akazukin.cpp */; };
@@ -39,7 +40,6 @@
 		FE1B1092235615940065200C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FE1B1091235615940065200C /* AppDelegate.m */; };
 		FE1B1094235615950065200C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE1B1093235615950065200C /* Assets.xcassets */; };
 		FE1B1097235615950065200C /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE1B1095235615950065200C /* MainMenu.xib */; };
-		FE1B109A235615950065200C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FE1B1099235615950065200C /* main.m */; };
 		FE1B23A023561A750065200C /* m68kcpu.c in Sources */ = {isa = PBXBuildFile; fileRef = FE1B1C9C23561A610065200C /* m68kcpu.c */; settings = {COMPILER_FLAGS = "-Wno-sometimes-uninitialized -Wno-conditional-uninitialized"; }; };
 		FE1B23A423561A750065200C /* z180_intf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FE1B1CA223561A610065200C /* z180_intf.cpp */; };
 		FE1B23A523561A750065200C /* z80_intf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FE1B1CA323561A610065200C /* z80_intf.cpp */; };
@@ -1160,6 +1160,8 @@
 		2EC884FA29E8639100636F75 /* initial_state.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = initial_state.fs; sourceTree = "<group>"; };
 		2EC884FC29F1CAFB00636F75 /* remote.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = remote.c; sourceTree = "<group>"; };
 		2EC884FE29F1CCD500636F75 /* remote.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = remote.h; sourceTree = "<group>"; };
+		2EC884FF2A12C34300636F75 /* Emulator-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Emulator-Bridging-Header.h"; sourceTree = "<group>"; };
+		2EC885002A12C34400636F75 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		55F1B3E329D1595C00F939E3 /* rectangle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = rectangle.h; sourceTree = "<group>"; };
 		55F1B3E429D1599500F939E3 /* dtimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dtimer.cpp; sourceTree = "<group>"; };
 		55F1B3E529D1599500F939E3 /* dtimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dtimer.h; sourceTree = "<group>"; };
@@ -1203,7 +1205,6 @@
 		FE1B1093235615950065200C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FE1B1096235615950065200C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		FE1B1098235615950065200C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FE1B1099235615950065200C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		FE1B109B235615960065200C /* FinalBurnNeo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FinalBurnNeo.entitlements; sourceTree = "<group>"; };
 		FE1B1C9A23561A610065200C /* m68kfpu.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = m68kfpu.c; sourceTree = "<group>"; };
 		FE1B1C9B23561A610065200C /* m68k.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = m68k.h; sourceTree = "<group>"; };
@@ -2914,11 +2915,12 @@
 				FE0A7E9E2394B87B001E6997 /* Views */,
 				FE1B1090235615940065200C /* AppDelegate.h */,
 				FE1B1091235615940065200C /* AppDelegate.m */,
-				FE1B1099235615950065200C /* main.m */,
 				FE2BC6BA2362B4E200B9D150 /* dsa_pub.pem */,
 				FEF4EE882363720B004E0DCE /* Defaults.plist */,
 				FE1B1098235615950065200C /* Info.plist */,
 				FE1B1093235615950065200C /* Assets.xcassets */,
+				2EC885002A12C34400636F75 /* main.swift */,
+				2EC884FF2A12C34300636F75 /* Emulator-Bridging-Header.h */,
 			);
 			path = Emulator;
 			sourceTree = "<group>";
@@ -5403,6 +5405,7 @@
 				TargetAttributes = {
 					FE1B108C235615940065200C = {
 						CreatedOnToolsVersion = 11.1;
+						LastSwiftMigration = 1430;
 					};
 				};
 			};
@@ -5701,7 +5704,6 @@
 				FE1B275523561A780065200C /* d_pitnrun.cpp in Sources */,
 				FE1B23DD23561A750065200C /* m6502_intf.cpp in Sources */,
 				FE1B269923561A770065200C /* d_popeye.cpp in Sources */,
-				FE1B109A235615950065200C /* main.m in Sources */,
 				FE1B245123561A750065200C /* compress.c in Sources */,
 				FE1B264D23561A770065200C /* d_ashnojoe.cpp in Sources */,
 				FE1B27B923561A790065200C /* nb1414m4_8bit.cpp in Sources */,
@@ -6192,6 +6194,7 @@
 				FE1B273623561A780065200C /* d_tbowl.cpp in Sources */,
 				FE1B23AF23561A750065200C /* pic16c5x_intf.cpp in Sources */,
 				FE1B25BE23561A760065200C /* d_mainevt.cpp in Sources */,
+				2EC885012A12C34400636F75 /* main.swift in Sources */,
 				FE1B25DF23561A760065200C /* d_chqflag.cpp in Sources */,
 				FE1B25F523561A760065200C /* midwunit.cpp in Sources */,
 				FE1B252E23561A760065200C /* d_mugsmash.cpp in Sources */,
@@ -6838,6 +6841,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CODE_SIGN_ENTITLEMENTS = "Emulator/FinalBurn NeoDebug.entitlements";
 				CODE_SIGN_IDENTITY = "-";
@@ -6873,6 +6877,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.akop.FinalBurnNeo;
 				PRODUCT_NAME = "FinalBurn Neo";
+				SWIFT_OBJC_BRIDGING_HEADER = "Emulator/Emulator-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				WARNING_CFLAGS = (
 					"-Wno-unused-const-variable",
 					"-Wno-shift-negative-value",
@@ -6901,6 +6908,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CODE_SIGN_ENTITLEMENTS = Emulator/FinalBurnNeo.entitlements;
 				CODE_SIGN_IDENTITY = "-";
@@ -6936,6 +6944,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.akop.FinalBurnNeo;
 				PRODUCT_NAME = "FinalBurn Neo";
+				SWIFT_OBJC_BRIDGING_HEADER = "Emulator/Emulator-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				WARNING_CFLAGS = (
 					"-Wno-unused-const-variable",
 					"-Wno-shift-negative-value",

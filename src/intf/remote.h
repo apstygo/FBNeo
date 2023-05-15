@@ -7,9 +7,10 @@ extern "C" {
 #endif
 
 extern char remote_inputs[INPUT_COUNT];
+extern char remote_should_reset;
 
 int RemoteInit();
-int RemoteSendBuffer(unsigned char* buffer);
+int RemoteCommunicate(unsigned char* buffer);
 
 #ifdef __cplusplus
 }

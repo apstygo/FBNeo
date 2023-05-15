@@ -18,6 +18,13 @@ void SetNVRAMPath(const char *path)
     strncpy(NVRAMPath, path, MAX_PATH);
 }
 
+void LoadNVRAM() {
+    char temp[MAX_PATH];
+    snprintf(temp, MAX_PATH, "%s", NVRAMPath);
+
+    BurnStateLoad(temp, 1, NULL);
+}
+
 int OneTimeInit()
 {
     return BurnLibInit();
@@ -63,11 +70,7 @@ int MainInit(const char *path, const char *setname)
     MediaInit();
     RunInit();
 
-    // Load NVRAM
-    char temp[MAX_PATH];
-    snprintf(temp, MAX_PATH, "%s", NVRAMPath);
-
-    BurnStateLoad(temp, 1, NULL);
+    LoadNVRAM();
 
     if (bRunPause)
         AudSoundStop();
@@ -79,6 +82,11 @@ int MainInit(const char *path, const char *setname)
 
 int MainFrame()
 {
+    if (remote_should_reset) {
+        LoadNVRAM();
+        remote_should_reset = 0;
+    }
+
     RunIdle();
 
     return 0;

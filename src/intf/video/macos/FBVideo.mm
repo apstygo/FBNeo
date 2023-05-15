@@ -173,7 +173,12 @@ static int MacOSVideoFrame(bool redraw)
 
 static int MacOSVideoPaint(int validate)
 {
-    RemoteSendBuffer(screenBuffer);
+    int communication_result = RemoteCommunicate(screenBuffer);
+
+    if (communication_result) {
+        return 1;
+    }
+
     return [AppDelegate.sharedInstance.video renderToSurface:screenBuffer] ? 0 : 1;
 }
 

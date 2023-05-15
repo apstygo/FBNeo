@@ -14,7 +14,6 @@ def run(executable: str):
     while True:
         observation, info = env.reset()
         run_set(env)
-        break
 
 def run_set(env: gymnasium.Env):
     while True:

@@ -11,7 +11,13 @@
 #define FB_BUFFER_SIZE RESOLUTION * 2
 #define RGB_BUFFER_SIZE RESOLUTION * 3
 
+#define REMOTE_HEADER_T char
+#define REMOTE_HEADER_SIZE sizeof(REMOTE_HEADER_T)
+#define REMOTE_HEADER_INPUTS 0
+#define REMOTE_HEADER_RESET 1
+
 char remote_inputs[INPUT_COUNT];
+char remote_should_reset = 0;
 
 static int remote_socket;
 
@@ -34,7 +40,7 @@ int RemoteInit() {
     return 0;
 }
 
-int RemoteSendBuffer(unsigned char* buffer) {
+int RemoteCommunicate(unsigned char* buffer) {
     if (!remote_socket) {
         return 1;
     }
@@ -58,9 +64,26 @@ int RemoteSendBuffer(unsigned char* buffer) {
 
     send(remote_socket, rgb_buffer, RGB_BUFFER_SIZE, 0);
 
-    // get inputs
+    // receive "request"
 
-    recv(remote_socket, remote_inputs, INPUT_COUNT, 0);
+    REMOTE_HEADER_T header;
+
+    recv(remote_socket, &header, REMOTE_HEADER_SIZE, 0);
+
+    switch (header) {
+        case REMOTE_HEADER_INPUTS:
+            // receive inputs
+            recv(remote_socket, remote_inputs, INPUT_COUNT, 0);
+            break;
+
+        case REMOTE_HEADER_RESET:
+            // set reset flag
+            remote_should_reset = 1;
+            break;
+
+        default:
+            return 1;
+    }
 
     return 0;
 }

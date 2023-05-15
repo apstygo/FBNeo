@@ -59,7 +59,8 @@ class ThirdStrikeEnv(gym.Env):
 
         # send inputs
         inputs = self._action_to_inputs(action)
-        self.connection.socket.send(bytearray(inputs))
+        self.connection.socket.send(bytes((0,))) # 0 is the inputs header
+        self.connection.socket.send(bytes(inputs))
 
         # get state
         observation, info = self._get_state()
@@ -99,23 +100,24 @@ class ThirdStrikeEnv(gym.Env):
     def reset(self, seed=None, options=None):
         super().reset(seed=seed)
 
-        # cleanup
-        self._close_connection()
+        # reset
+        self._reset_connection()
         self.fight_state = FightState()
 
-        # start process
-        process = Popen([self.executable])
-        
-        # open socket
-        sock = socket.socket()
-        sock.bind(('', const.PORT))
-        sock.listen(1)
+        if self.connection is None:
+            # start process
+            process = Popen([self.executable])
+            
+            # open socket
+            sock = socket.socket()
+            sock.bind(('', const.PORT))
+            sock.listen(1)
 
-        sock, address = sock.accept()
-        print(f'Received a connection at address: {address}')
+            sock, address = sock.accept()
+            print(f'Received a connection at address: {address}')
 
-        # store connection
-        self.connection = Connection(process, sock)
+            # store connection
+            self.connection = Connection(process, sock)
 
         # get and return state
         return self._get_state()
@@ -179,6 +181,12 @@ class ThirdStrikeEnv(gym.Env):
             inputs[14:24] = action
 
         return inputs
+
+    def _reset_connection(self):
+        if self.connection is None:
+            return
+
+        self.connection.socket.send(bytes((1,))) # 1 is the reset header
 
     def _close_connection(self):
         if self.connection is not None:

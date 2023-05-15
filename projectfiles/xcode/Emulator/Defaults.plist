@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>masterVolume</key>
-	<integer>0</integer>
+	<integer>100</integer>
 	<key>hideLockOptions</key>
 	<true/>
 	<key>suppressScreenSaver</key>

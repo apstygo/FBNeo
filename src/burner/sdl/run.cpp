@@ -5,6 +5,8 @@
 #endif
 #include <sys/time.h>
 
+#include "cli_settings.h"
+
 static unsigned int nDoFPS = 0;
 bool bAltPause = 0;
 
@@ -256,14 +258,19 @@ int RunIdle()
 {
 	int nTime, nCount;
 
-//	if (bAudPlaying)
-//	{
-//		// Run with sound
-//		AudSoundCheck();
-//		return 0;
-//	}
-    RunFrame(1, 0);
-    return 0;
+	if (bAudPlaying && cli_settings.sound)
+	{
+		// Run with sound
+		AudSoundCheck();
+		return 0;
+    } else {
+        for (uint8_t i = 0; i < cli_settings.skipped_frames; i++) {
+            RunFrame(0, 0);
+        }
+
+        RunFrame(1, 0);
+        return 0;
+    }
 
 	// Run without sound
 	nTime = GetTime() - nNormalLast;

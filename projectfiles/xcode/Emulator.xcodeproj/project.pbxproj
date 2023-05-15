@@ -13,6 +13,7 @@
 		2EC884FD29F1CAFB00636F75 /* remote.c in Sources */ = {isa = PBXBuildFile; fileRef = 2EC884FC29F1CAFB00636F75 /* remote.c */; };
 		2EC885012A12C34400636F75 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC885002A12C34400636F75 /* main.swift */; };
 		2EC885042A12C5DC00636F75 /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 2EC885032A12C5DC00636F75 /* ArgumentParser */; };
+		2EC885072A12CA2500636F75 /* cli_settings.c in Sources */ = {isa = PBXBuildFile; fileRef = 2EC885062A12CA2500636F75 /* cli_settings.c */; };
 		55F1B3E629D1599500F939E3 /* dtimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55F1B3E429D1599500F939E3 /* dtimer.cpp */; };
 		55F1B3E929D15A1600F939E3 /* pic8259.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55F1B3E729D15A1600F939E3 /* pic8259.cpp */; };
 		55F1B3EB29D15A7100F939E3 /* d_akazukin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55F1B3EA29D15A7100F939E3 /* d_akazukin.cpp */; };
@@ -1163,6 +1164,8 @@
 		2EC884FE29F1CCD500636F75 /* remote.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = remote.h; sourceTree = "<group>"; };
 		2EC884FF2A12C34300636F75 /* Emulator-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Emulator-Bridging-Header.h"; sourceTree = "<group>"; };
 		2EC885002A12C34400636F75 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		2EC885052A12CA2500636F75 /* cli_settings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cli_settings.h; sourceTree = "<group>"; };
+		2EC885062A12CA2500636F75 /* cli_settings.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = cli_settings.c; sourceTree = "<group>"; };
 		55F1B3E329D1595C00F939E3 /* rectangle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = rectangle.h; sourceTree = "<group>"; };
 		55F1B3E429D1599500F939E3 /* dtimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dtimer.cpp; sourceTree = "<group>"; };
 		55F1B3E529D1599500F939E3 /* dtimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dtimer.h; sourceTree = "<group>"; };
@@ -3600,6 +3603,8 @@
 				FE1B1E5123561A660065200C /* video */,
 				2EC884FC29F1CAFB00636F75 /* remote.c */,
 				2EC884FE29F1CCD500636F75 /* remote.h */,
+				2EC885062A12CA2500636F75 /* cli_settings.c */,
+				2EC885052A12CA2500636F75 /* cli_settings.h */,
 			);
 			path = intf;
 			sourceTree = "<group>";
@@ -6071,6 +6076,7 @@
 				FE1B25C723561A760065200C /* d_trackfld.cpp in Sources */,
 				FEF37E7A25C7602F0036C4BD /* narc_sound.cpp in Sources */,
 				FE1B256723561A760065200C /* d_sys16a.cpp in Sources */,
+				2EC885072A12CA2500636F75 /* cli_settings.c in Sources */,
 				FE1B279E23561A790065200C /* sp0256.cpp in Sources */,
 				FE1B264623561A770065200C /* d_buggychl.cpp in Sources */,
 				FE1B269F23561A770065200C /* d_pengadvb.cpp in Sources */,
@@ -6870,6 +6876,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MARKETING_VERSION = 1.0.0.2;
 				OTHER_CFLAGS = (
 					"-DINLINE=\"static inline\"",
@@ -6937,6 +6944,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MARKETING_VERSION = 1.0.0.2;
 				OTHER_CFLAGS = (
 					"-DINLINE=\"static inline\"",

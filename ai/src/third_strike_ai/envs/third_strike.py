@@ -1,4 +1,4 @@
-from subprocess import Popen
+import subprocess
 import socket
 from dataclasses import dataclass
 import os
@@ -12,7 +12,7 @@ from third_strike_ai import constants as const
 
 @dataclass
 class Connection:
-    process: Popen[bytes]
+    process: subprocess.Popen[bytes]
     socket: socket.socket
 
 @dataclass
@@ -31,11 +31,15 @@ class ThirdStrikeEnv(gym.Env):
         executable: str,
         is_player_one: bool = True,
         damage_weights: tuple[float, float] = (1, 1),
+        skipped_frames: int = 0,
+        enable_sound: bool = False,
         render_mode: str | None = None
     ):
         self.executable = executable
         self.is_player_one = is_player_one
         self.damage_weights = damage_weights
+        self.skipped_frames = skipped_frames
+        self.enable_sound = enable_sound
         self.fight_state = FightState()
         self.connection: Connection | None = None 
 
@@ -106,7 +110,24 @@ class ThirdStrikeEnv(gym.Env):
 
         if self.connection is None:
             # start process
-            process = Popen([self.executable])
+            args: list[str] = [self.executable]
+
+            if self.render_mode != 'human':
+                args.append('--headless')
+
+            if self.skipped_frames > 0:
+                args.extend(('--skipped-frames', str(self.skipped_frames)))
+
+            if not self.enable_sound:
+                args.append('--disable-sound')
+
+            process = subprocess.Popen(
+                args, 
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL
+            )
+
+            print(f'Started process with args: {process.args}')
             
             # open socket
             sock = socket.socket()

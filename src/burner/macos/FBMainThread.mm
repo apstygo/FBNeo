@@ -16,6 +16,7 @@
 #import "AppDelegate.h"
 
 #include "main.h"
+#include "cli_settings.h"
 
 typedef enum LogEntryType {
     LogEntryMessage,
@@ -134,8 +135,9 @@ typedef enum LogEntryType {
             continue;
         }
 
-        AppDelegate.sharedInstance.audio.volume = [NSUserDefaults.standardUserDefaults
-                                                   integerForKey:@"masterVolume"] / 100.0f;
+        AppDelegate.sharedInstance.audio.volume = cli_settings.sound
+            ? [NSUserDefaults.standardUserDefaults integerForKey:@"masterVolume"] / 100.0f
+            : 0;
 
         // Load DIP switch config
         NSString *dipPath = [AppDelegate.sharedInstance.dipSwitchPath stringByAppendingPathComponent:

@@ -11,6 +11,7 @@
 
 #include "burner.h"
 #include "remote.h"
+#include "cli_settings.h"
 
 @implementation FBVideo
 
@@ -173,13 +174,13 @@ static int MacOSVideoFrame(bool redraw)
 
 static int MacOSVideoPaint(int validate)
 {
-    int communication_result = RemoteCommunicate(screenBuffer);
+    RemoteCommunicate(screenBuffer);
 
-    if (communication_result) {
-        return 1;
+    if (cli_settings.headless) {
+        return 0;
+    } else {
+        return [AppDelegate.sharedInstance.video renderToSurface:screenBuffer] ? 0 : 1;
     }
-
-    return [AppDelegate.sharedInstance.video renderToSurface:screenBuffer] ? 0 : 1;
 }
 
 static int MacOSVideoScale(RECT*, int, int)

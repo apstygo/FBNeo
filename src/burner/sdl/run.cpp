@@ -256,12 +256,14 @@ int RunIdle()
 {
 	int nTime, nCount;
 
-	if (bAudPlaying)
-	{
-		// Run with sound
-		AudSoundCheck();
-		return 0;
-	}
+//	if (bAudPlaying)
+//	{
+//		// Run with sound
+//		AudSoundCheck();
+//		return 0;
+//	}
+    RunFrame(1, 0);
+    return 0;
 
 	// Run without sound
 	nTime = GetTime() - nNormalLast;

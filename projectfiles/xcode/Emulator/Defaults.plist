@@ -3,13 +3,13 @@
 <plist version="1.0">
 <dict>
 	<key>masterVolume</key>
-	<integer>100</integer>
+	<integer>0</integer>
 	<key>hideLockOptions</key>
 	<true/>
 	<key>suppressScreenSaver</key>
 	<true/>
 	<key>pauseWhenInactive</key>
-	<true/>
+	<false/>
 	<key>useDisplayLink</key>
 	<false/>
 </dict>

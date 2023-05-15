@@ -104,8 +104,7 @@ class ThirdStrikeEnv(gym.Env):
         self.fight_state = FightState()
 
         # start process
-        env = dict(os.environ, pauseWhenInactive="false")
-        process = Popen([self.executable], env=env)
+        process = Popen([self.executable])
         
         # open socket
         sock = socket.socket()

@@ -4,10 +4,10 @@ import gymnasium
 app = typer.Typer()
 
 @app.command()
-def run():    
+def run(executable: str):
     env = gymnasium.make(
         "ThirdStrike-v0", 
-        executable='./.build/Build/Products/Debug/FinalBurn Neo.app/Contents/MacOS/FinalBurn Neo',
+        executable=executable,
         is_player_one=True
     )
 

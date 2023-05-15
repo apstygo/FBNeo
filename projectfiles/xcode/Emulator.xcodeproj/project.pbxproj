@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,6 +12,7 @@
 		2EC884FB29E8639200636F75 /* initial_state.fs in Resources */ = {isa = PBXBuildFile; fileRef = 2EC884FA29E8639100636F75 /* initial_state.fs */; };
 		2EC884FD29F1CAFB00636F75 /* remote.c in Sources */ = {isa = PBXBuildFile; fileRef = 2EC884FC29F1CAFB00636F75 /* remote.c */; };
 		2EC885012A12C34400636F75 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC885002A12C34400636F75 /* main.swift */; };
+		2EC885042A12C5DC00636F75 /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 2EC885032A12C5DC00636F75 /* ArgumentParser */; };
 		55F1B3E629D1599500F939E3 /* dtimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55F1B3E429D1599500F939E3 /* dtimer.cpp */; };
 		55F1B3E929D15A1600F939E3 /* pic8259.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55F1B3E729D15A1600F939E3 /* pic8259.cpp */; };
 		55F1B3EB29D15A7100F939E3 /* d_akazukin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55F1B3EA29D15A7100F939E3 /* d_akazukin.cpp */; };
@@ -2857,6 +2858,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2EC885042A12C5DC00636F75 /* ArgumentParser in Frameworks */,
 				FE2BC6B7236265C000B9D150 /* Sparkle.framework in Frameworks */,
 				FEED9DCA2356EF5000B7AF83 /* OpenGL.framework in Frameworks */,
 			);
@@ -5390,6 +5392,9 @@
 			dependencies = (
 			);
 			name = Emulator;
+			packageProductDependencies = (
+				2EC885032A12C5DC00636F75 /* ArgumentParser */,
+			);
 			productName = FinalBurnNeo;
 			productReference = FE1B108D235615940065200C /* FinalBurn Neo.app */;
 			productType = "com.apple.product-type.application";
@@ -5418,6 +5423,9 @@
 				Base,
 			);
 			mainGroup = FE1B1084235615940065200C;
+			packageReferences = (
+				2EC885022A12C5DC00636F75 /* XCRemoteSwiftPackageReference "swift-argument-parser" */,
+			);
 			productRefGroup = FE1B108E235615940065200C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -6992,6 +7000,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2EC885022A12C5DC00636F75 /* XCRemoteSwiftPackageReference "swift-argument-parser" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-argument-parser.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2EC885032A12C5DC00636F75 /* ArgumentParser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2EC885022A12C5DC00636F75 /* XCRemoteSwiftPackageReference "swift-argument-parser" */;
+			productName = ArgumentParser;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = FE1B1085235615940065200C /* Project object */;
 }

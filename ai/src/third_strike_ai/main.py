@@ -1,7 +1,3 @@
-import socket
-import numpy as np
-from PIL import Image
-
 import typer
 import gymnasium
 

@@ -15,7 +15,7 @@ xcodebuild -project ./projectfiles/xcode/Emulator.xcodeproj -scheme Emulator -de
 ```bash
 python3 -m venv venv
 source venv/bin/activate
-python -m pip install ai/
+python -m pip install -e ai/
 ```
 
 3. Run
